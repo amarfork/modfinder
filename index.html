@@ -43,10 +43,16 @@ body, html {height:100%; font-family:'Poppins', sans-serif; overflow-x:hidden;}
     50%{transform:translateY(-25px);}
 }
 
+/* ===== INPUT + BUTTON WRAPPER ===== */
+.code-box {
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
 /* ===== ENTER CODE FIELD ===== */
 .code-input {
-    width:320px;
-    max-width:90%;
+    width:260px;
     padding:15px 20px;
     border-radius:50px;
     border:none;
@@ -62,6 +68,29 @@ body, html {height:100%; font-family:'Poppins', sans-serif; overflow-x:hidden;}
     letter-spacing:1px;
 }
 
+/* ===== GO BUTTON ===== */
+.go-btn {
+    padding:15px 28px;
+    border-radius:50px;
+    border:none;
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+    cursor:pointer;
+    background:linear-gradient(45deg,#ff6b6b,#feca57,#48dbfb,#1dd1a1);
+    background-size:300% 300%;
+    animation: gradientAnim 6s ease infinite;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+.go-btn:hover {
+    transform:scale(1.1);
+}
+@keyframes gradientAnim {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
 .emoji-text {
     font-size:24px;
     margin-top:20px;
@@ -74,10 +103,7 @@ footer {
     align-items:center;
     gap:12px;
 }
-footer img {
-    width:45px;
-    cursor:pointer;
-}
+footer img {width:45px;}
 footer .contact-btn {
     background:rgba(255,255,255,0.15);
     padding:10px 25px;
@@ -95,20 +121,23 @@ footer .contact-btn {
 <div class="container">
     <div class="logo"></div>
 
-    <!-- ENTER A CODE FIELD -->
-    <input 
-        type="text" 
-        class="code-input"
-        placeholder="ENTER A CODE"
-        onkeydown="if(event.key==='Enter' && this.value.trim()!==''){ window.location.href='text.html'; }"
-    >
+    <!-- ENTER CODE + GO BUTTON -->
+    <div class="code-box">
+        <input 
+            type="text"
+            class="code-input"
+            placeholder="ENTER A CODE"
+            id="code"
+            onkeydown="if(event.key==='Enter'){ goPage(); }"
+        >
+        <button class="go-btn" onclick="goPage()">GO</button>
+    </div>
 
     <div class="emoji-text">
         🚀✨🔥 Join the adventure! 🌟🎮💥
     </div>
 </div>
 
-<!-- FOOTER (UNCHANGED) -->
 <footer>
     <a href="https://t.me/sohamgameplay" target="_blank">
         <img src="tg.png" alt="Telegram">
@@ -119,6 +148,13 @@ footer .contact-btn {
 </footer>
 
 <script>
+function goPage(){
+    const val = document.getElementById('code').value.trim();
+    if(val !== ''){
+        window.location.href = val + '.html';
+    }
+}
+
 particlesJS("particles-js", {
     particles:{
         number:{value:60},
